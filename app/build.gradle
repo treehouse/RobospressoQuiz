@@ -1,0 +1,46 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+
+    defaultConfig {
+        applicationId "com.teamtreehouse.robospressoquizapp"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner" // Espresso
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23.3.0'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // Espresso (also need testInstrumentationRunner ^)
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    androidTestCompile 'com.android.support:support-annotations:23.3.0'
+
+    // Robolectric
+    testCompile 'org.robolectric:robolectric:3.1'
+    // java.lang.NoClassDefFoundError: javax/microedition/khronos/opengles/GL
+    // Caused by: java.lang.ClassNotFoundException: javax.microedition.khronos.opengles.GL
+    testCompile 'org.khronos:opengl-api:gl1.1-android-2.1_r1'
+
+}
+repositories {
+    mavenCentral()
+}
